@@ -10,6 +10,6 @@ import DependenciesMacros
 /// so the ad SDK bridge no longer imports AdjustClient or AnalyticClient.
 @DependencyClient
 public struct AdRevenueClient: Sendable {
-    public var publish: @Sendable (_ event: AdRevenueEvent) -> Void
-    public var events: @Sendable () -> AsyncStream<AdRevenueEvent> = { .finished }
+    public var publish: @Sendable (_ event: Event) -> Void
+    public var events: @Sendable () -> AsyncStream<Event> = { AsyncStream { _ in } }
 }

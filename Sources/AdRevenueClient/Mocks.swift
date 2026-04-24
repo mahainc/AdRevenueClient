@@ -18,10 +18,11 @@ extension AdRevenueClient: TestDependencyKey {
 }
 
 extension AdRevenueClient {
-    /// No-op publisher, empty stream. Useful for happy-path test stores that
-    /// don't assert on the revenue pipeline.
+    /// No-op publisher, never-ending stream. Useful for happy-path test stores
+    /// that don't assert on the revenue pipeline. The stream stays open so
+    /// previews don't terminate observers prematurely.
     public static let noop: Self = .init(
         publish: { _ in },
-        events: { .finished }
+        events: { AsyncStream { _ in } }
     )
 }
