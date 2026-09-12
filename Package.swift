@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "AdRevenueClient",
     platforms: [
-        .iOS(.v16)
+        .iOS(.v17)
     ],
     products: [
         .singleTargetLibrary("AdRevenueClient"),
@@ -14,6 +14,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.9.0"),
         .package(url: "https://github.com/pointfreeco/swift-case-paths.git", from: "1.5.0"),
+        .package(url: "https://github.com/mahainc/FunnelClient.git", exact: "7.0.0"),
     ],
     targets: [
         .target(
@@ -30,6 +31,7 @@ let package = Package(
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "DependenciesMacros", package: "swift-dependencies"),
                 .product(name: "CasePaths", package: "swift-case-paths"),
+                .product(name: "FunnelClient", package: "FunnelClient"),
                 "AdRevenueClient",
             ]
         ),

@@ -7,7 +7,7 @@ import DependenciesMacros
 /// iterate `events()` and fan out to Adjust / Analytics / etc.
 ///
 /// Replaces the per-consumer fan-out that previously lived inside MobileAdsClient,
-/// so the ad SDK bridge no longer imports AdjustClient or AnalyticClient.
+/// so the ad SDK bridge no longer imports AdjustClient or AnalyticsClient.
 @DependencyClient
 public struct AdRevenueClient: Sendable {
     public var publish: @Sendable (_ event: Event) -> Void

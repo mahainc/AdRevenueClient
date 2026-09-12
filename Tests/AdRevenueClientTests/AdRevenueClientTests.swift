@@ -1,5 +1,7 @@
 import Foundation
+import FunnelClient
 import Testing
+
 @testable import AdRevenueClient
 @testable import AdRevenueClientLive
 
@@ -59,6 +61,44 @@ struct AdRevenueClientTests {
         #expect(events.isEmpty)
     }
 
+    @Test("Funnel provider maps event fields and micros amount")
+    func funnelProviderMapping() async throws {
+        let (source, continuation) = AsyncStream<AdRevenueEvent>.makeStream()
+        let client = AdRevenueClient(publish: { _ in }, events: { source })
+        let provider = AdRevenueFunnelProvider(adRevenueClient: client)
+        let mapped = provider.events()
+
+        continuation.yield(
+            .fixture(
+                amount: 1_500_000,
+                currency: "USD",
+                adUnitId: "unit-1",
+                format: .rewarded,
+                source: .googleMobileAds,
+                featureId: "highlights",
+                network: "AppLovin",
+                slotRef: "slot-7"
+            )
+        )
+        continuation.finish()
+
+        var events: [FunnelClient.AdRevenue.Event] = []
+        for await event in mapped {
+            events.append(event)
+        }
+
+        #expect(events.count == 1)
+        #expect(events.first?.unitID == "unit-1")
+        #expect(events.first?.featureID == "highlights")
+        #expect(events.first?.slotRef == "slot-7")
+        #expect(events.first?.adFormat == "rewarded")
+        // The mediation network that filled the impression, NOT `source` — reporting
+        // the SDK here would collapse every mediated network into one GA4 value.
+        #expect(events.first?.adSource == "AppLovin")
+        #expect(events.first?.value == 1.5)
+        #expect(events.first?.currency == "USD")
+    }
+
     @Test("AdRevenueEvent round-trips through JSON")
     func codableRoundTrip() throws {
         let original = AdRevenueEvent.fixture(
@@ -95,7 +135,10 @@ extension AdRevenueEvent {
         adUnitId: String = "ca-app-pub-0000000000000000/0000000000",
         format: AdFormat = .interstitial,
         source: Source = .googleMobileAds,
-        receivedAt: Date = Date(timeIntervalSince1970: 1_700_000_000)
+        receivedAt: Date = Date(timeIntervalSince1970: 1_700_000_000),
+        featureId: String = "",
+        network: String = "",
+        slotRef: String = ""
     ) -> AdRevenueEvent {
         AdRevenueEvent(
             amount: amount,
@@ -103,7 +146,10 @@ extension AdRevenueEvent {
             adUnitId: adUnitId,
             format: format,
             source: source,
-            receivedAt: receivedAt
+            receivedAt: receivedAt,
+            featureId: featureId,
+            network: network,
+            slotRef: slotRef
         )
     }
 }
