@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "run_id": "audit-1789016504-adrevenue",
+  "snapshot": "f2d069b211aefa48eda8fc0c45f9f7a3dd851044a081599177bddc5149a46c75",
+  "ruleset": "29190811dc05dace4faeeb2feaa868a8887548d6ec628e10df30282b47492a47",
+  "units": [
+    {"id":"u1","path":"Package.swift","side":"new","start":8,"end":8,"kind":"environment","classification_reason":"Changed deployment platform declaration inspected."},
+    {"id":"u2","path":"Package.swift","side":"new","start":17,"end":17,"kind":"environment","classification_reason":"Changed package dependency declaration inspected."},
+    {"id":"u3","path":"Package.swift","side":"new","start":34,"end":34,"kind":"environment","classification_reason":"Changed target dependency declaration inspected."},
+    {"id":"u4","path":"Sources/AdRevenueClientLive/AdRevenueFunnelProvider.swift","side":"new","start":1,"end":35,"kind":"type","classification_reason":"New provider type and all contained initializer, stream adapter, mapping helper, and constant inspected."},
+    {"id":"u5","path":"Tests/AdRevenueClientTests/AdRevenueClientTests.swift","side":"new","start":3,"end":3,"kind":"module","classification_reason":"Added module separation whitespace hunk has no executable unit."},
+    {"id":"u6","path":"Tests/AdRevenueClientTests/AdRevenueClientTests.swift","side":"new","start":63,"end":95,"kind":"test","classification_reason":"New provider mapping test inspected for arrangement, stream completion, assertions, and naming."}
+  ],
+  "rules": [
+    {"id":"E1","checks":[{"units":["u1","u2","u3"],"status":"pass","evidence":"Package manifest changes remain declarative and compatible with the repository's single SwiftPM build entry point."},{"units":["u4","u5","u6"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"Not build-environment units."}]},
+    {"id":"G5","checks":[{"units":["u4","u6"],"status":"pass","evidence":"Provider mapping has one conversion path; the test contains no duplicated implementation logic."},{"units":["u1","u2","u3","u5"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No duplicated logic surface."}]},
+    {"id":"G25","checks":[{"units":["u4"],"status":"fixed","evidence":"Replaced the domain conversion literal 1_000_000 with private static microsPerUnit."},{"units":["u1","u2","u3","u5","u6"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No affected magic domain literal surface."}]},
+    {"id":"G30","checks":[{"units":["u4","u6"],"status":"pass","evidence":"events() streams, funnelEvent(from:) maps, and funnelProviderMapping() verifies one coherent responsibility each."},{"units":["u1","u2","u3","u5"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No callable logic surface."}]},
+    {"id":"G34","checks":[{"units":["u4"],"status":"pass","evidence":"The public stream method delegates event conversion to a same-level mapping helper."},{"units":["u1","u2","u3","u5","u6"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No abstraction-level issue."}]},
+    {"id":"N1","checks":[{"units":["u4","u6"],"status":"pass","evidence":"Provider and mapping-test names reveal their roles."},{"units":["u1","u2","u3","u5"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No naming surface."}]},
+    {"id":"N3","checks":[{"units":["u4","u6"],"status":"pass","evidence":"Provider, mapping, events, and test terminology follows Swift and repository conventions."},{"units":["u1","u2","u3","u5"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No affected terminology surface."}]},
+    {"id":"N5","checks":[{"units":["u4","u6"],"status":"pass","evidence":"Names are searchable at type/member scope; short event locals remain limited to small loops and closures."},{"units":["u1","u2","u3","u5"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No identifier naming surface."}]},
+    {"id":"N7","checks":[{"units":["u4"],"status":"pass","evidence":"events() accurately describes the returned event stream and does not hide mutation or query-side effects."},{"units":["u1","u2","u3","u5","u6"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No side-effect naming surface."}]},
+    {"id":"T1","checks":[{"units":["u6"],"status":"pass","evidence":"The new provider mapping path is covered by a self-validating test asserting every mapped field."},{"units":["u1","u2","u3","u4","u5"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No changed test coverage surface."}]},
+    {"id":"T3","checks":[{"units":["u6"],"status":"pass","evidence":"Direct mapping behavior has a focused regression test despite being straightforward."},{"units":["u1","u2","u3","u4","u5"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No changed test surface."}]},
+    {"id":"T5","checks":[{"units":["u6"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"The changed behavior adds ordinary field mapping; no boundary-condition behavior is introduced."},{"units":["u1","u2","u3","u4","u5"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No test-boundary surface."}]},
+    {"id":"T6","checks":[{"units":["u6"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No defect or boundary bug was found that requires surrounding cases."},{"units":["u1","u2","u3","u4","u5"],"status":"na","evidence":"No affected surface for this rule in this unit.","reason":"No defect-neighborhood surface."}]}
+  ],
+  "default_na":{"reason":"No affected surface in the changed manifest, new provider, module hunk, or mapping test for omitted Chapter-17 rules."},
+  "findings":[]
+}

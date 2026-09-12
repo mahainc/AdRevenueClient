@@ -10,7 +10,7 @@ struct AdRevenueClientTests {
 
     @Test("publish() fans out to every active events() subscriber")
     func multicastFanOut() async throws {
-        let client = AdRevenueClient.liveValue
+        let client = AdRevenueClient.makeLive()
 
         async let firstCollect: [AdRevenueEvent] = collect(client.events(), count: 2)
         async let secondCollect: [AdRevenueEvent] = collect(client.events(), count: 2)
@@ -28,7 +28,7 @@ struct AdRevenueClientTests {
 
     @Test("events() stream terminates when subscriber task is cancelled")
     func terminationCleansUp() async throws {
-        let client = AdRevenueClient.liveValue
+        let client = AdRevenueClient.makeLive()
 
         let task = Task { () -> Int in
             var count = 0
@@ -61,12 +61,13 @@ struct AdRevenueClientTests {
         #expect(events.isEmpty)
     }
 
-    @Test("Funnel provider maps event fields and micros amount")
-    func funnelProviderMapping() async throws {
+    @Test("Funnel conformance maps event fields and micros amount")
+    func funnelConformanceMapping() async throws {
         let (source, continuation) = AsyncStream<AdRevenueEvent>.makeStream()
         let client = AdRevenueClient(publish: { _ in }, events: { source })
-        let provider = AdRevenueFunnelProvider(adRevenueClient: client)
-        let mapped = provider.events()
+        // The client itself satisfies the port, so a host needs no wrapper type. The
+        // annotation picks the port's `events()` over the client's own same-named closure.
+        let mapped: AsyncStream<FunnelClient.AdRevenue.Event> = client.events()
 
         continuation.yield(
             .fixture(

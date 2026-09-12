@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "run_id": "verify-1789017112-adrevenue-fresh",
+  "snapshot": "f2d069b211aefa48eda8fc0c45f9f7a3dd851044a081599177bddc5149a46c75",
+  "ruleset": "29190811dc05dace4faeeb2feaa868a8887548d6ec628e10df30282b47492a47",
+  "audit_digest": "dcf9037b37726261b4d558cd7c88b777d801892ea4bfe0921bc3ccb105d1b9c0",
+  "prepared_digest": "BLOCK: check-prepared reported stale preparation",
+  "source_first": true,
+  "scope_review": "Inspected Package.swift changed manifest declarations, the complete new AdRevenueFunnelProvider type, and the added mapping-test hunk. The changed behavioral surface is the provider stream adapter, its micros conversion, and the focused test; the blank-line hunk has no executable unit.",
+  "skip_review": "The audit's explicit rules cover environment, duplication, magic literal, responsibility/abstraction, naming, side effects, and test coverage. I agree the compact default rationale is applicable to the remaining rules after reviewing the affected units. The preparation evidence is stale and blocks a PASS-candidate until main reruns preparation for the current snapshot.",
+  "rules": [
+    {"id":"E1","status":"agree","evidence":"Package.swift edits are declarative platform, dependency, and target wiring changes; no implementation-level environment issue is present."},
+    {"id":"G5","status":"agree","evidence":"AdRevenueFunnelProvider has one conversion path, and the mapping test does not duplicate production logic."},
+    {"id":"G25","status":"agree","evidence":"The provider uses the named microsPerUnit constant for the micros-to-unit conversion."},
+    {"id":"G30","status":"agree","evidence":"events() adapts the stream while funnelEvent(from:) performs conversion; each has one coherent responsibility, and the test verifies the path."},
+    {"id":"G34","status":"agree","evidence":"The public stream method delegates event conversion to a same-level private helper."},
+    {"id":"N1","status":"agree","evidence":"Provider, member, and test names communicate their roles."},
+    {"id":"N3","status":"agree","evidence":"Provider, mapping, and event terminology follows Swift and repository conventions."},
+    {"id":"N5","status":"agree","evidence":"Names are descriptive at type/member scope; short stream locals are tightly scoped."},
+    {"id":"N7","status":"agree","evidence":"events() accurately names the returned event stream and does not conceal unrelated side effects."},
+    {"id":"T1","status":"agree","evidence":"The new mapping path has a focused test asserting every mapped output field."},
+    {"id":"T3","status":"agree","evidence":"The direct mapping behavior has an explicit regression test."},
+    {"id":"T5","status":"agree","evidence":"No new boundary-specific behavior is introduced by the ordinary field mapping."},
+    {"id":"T6","status":"agree","evidence":"No defect requiring a surrounding regression matrix was found in the inspected surface."}
+  ],
+  "default": {"evidence":"Independently inspected all changed hunks and confirmed no additional applicable surface for omitted Chapter-17 rules; this judgment does not override the stale-preparation blocker."},
+  "findings": [
+    {"severity":"blocker","code":"EVIDENCE","file":"/Users/thanhhaikhong/Documents/AdRevenueClient/.claude/clean-code/prepared.json","line":3,"message":"check-prepared failed: stale preparation; prepared snapshot bb00a55594dc042e3aedb25fa249b00281ba7076d89ed157aa0dad1019aa5c61 does not match current snapshot f2d069b211aefa48eda8fc0c45f9f7a3dd851044a081599177bddc5149a46c75. Re-run preparation for the current snapshot before verification/seal."}
+  ]
+}
