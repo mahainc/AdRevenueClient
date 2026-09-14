@@ -8,8 +8,6 @@ import FunnelClient
 /// hands back something that already satisfies the port. The relay state lives in
 /// `AdRevenueActor`, which the client's closures capture, so nothing needs to be stored here.
 extension AdRevenueClient: FunnelClient.AdRevenue.Providing {
-    private static let microsPerUnit = 1_000_000.0
-
     /// The port's `events()` and this client's own `events` closure differ only in element
     /// type; the explicit annotation below is what keeps the call unambiguous.
     public func events() -> AsyncStream<FunnelClient.AdRevenue.Event> {
@@ -37,7 +35,7 @@ extension AdRevenueClient: FunnelClient.AdRevenue.Providing {
             slotRef: event.slotRef,
             adFormat: event.format.rawValue,
             adSource: event.network,
-            value: event.amount / microsPerUnit,
+            value: event.amount,
             currency: event.currency
         )
     }

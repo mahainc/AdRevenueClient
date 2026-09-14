@@ -1,7 +1,435 @@
 {
   "version": 1,
   "cycles": {
-    "head": "8c8dd683d71cfa553856fdb5b1466f20b148b54b",
+    "head": "7a7fe957430c6c6c26af8c6682066539a2ed2682",
+    "review_rounds": 3,
     "build_failures": 0
+  },
+  "policy": "normalize",
+  "hash": "52b71ee687a609542d0c80ed9df84eab81ccf50d0fd52db9602eab495622c0b9",
+  "units": [
+    {
+      "id": "u1",
+      "path": "Sources/AdRevenueClientLive/AdRevenueClient+Funnel.swift",
+      "kind": "deletion",
+      "kinds": [
+        "deletion"
+      ],
+      "start": 11,
+      "end": 12,
+      "side": "old",
+      "name": "(removed)",
+      "sha": "2e613e15",
+      "digests": {
+        "decl": "2e613e15f1ec2d33",
+        "body": "2e613e15f1ec2d33",
+        "unit": "2e613e15f1ec2d33",
+        "file": "dd941b037ab8a16e"
+      },
+      "judgment": [],
+      "sealed": [
+        "C2",
+        "C4",
+        "G16",
+        "G32"
+      ],
+      "removed": "    private static let microsPerUnit = 1_000_000.0\n"
+    },
+    {
+      "id": "u2",
+      "path": "Sources/AdRevenueClientLive/AdRevenueClient+Funnel.swift",
+      "kind": "function",
+      "kinds": [
+        "change",
+        "function"
+      ],
+      "start": 31,
+      "end": 41,
+      "side": "new",
+      "name": "funnelEvent",
+      "sha": "886d75a3",
+      "digests": {
+        "decl": "f7094eb61cc0be0f",
+        "body": "bf2333e8f7048a02",
+        "unit": "886d75a3d4cc4a46",
+        "file": "dd941b037ab8a16e"
+      },
+      "judgment": [],
+      "sealed": [
+        "C2",
+        "C4",
+        "G2",
+        "G6",
+        "G16",
+        "G20",
+        "G21",
+        "G31",
+        "G32",
+        "N2",
+        "N4"
+      ]
+    },
+    {
+      "id": "u3",
+      "path": "Tests/AdRevenueClientTests/AdRevenueClientTests.swift",
+      "kind": "function",
+      "kinds": [
+        "change",
+        "function",
+        "test"
+      ],
+      "start": 56,
+      "end": 71,
+      "side": "new",
+      "name": "noopMock",
+      "sha": "02da9581",
+      "digests": {
+        "decl": "8f7dd092db4df2f3",
+        "body": "0adf7596c5d703c2",
+        "unit": "02da958171a1ebf8",
+        "file": "1dfea014a1300af1"
+      },
+      "judgment": [
+        "T2",
+        "T8",
+        "T9"
+      ],
+      "sealed": []
+    },
+    {
+      "id": "u4",
+      "path": "Tests/AdRevenueClientTests/AdRevenueClientTests.swift",
+      "kind": "struct",
+      "kinds": [
+        "change",
+        "struct",
+        "test"
+      ],
+      "start": 9,
+      "end": 140,
+      "side": "new",
+      "name": "AdRevenueClientTests",
+      "sha": "c70c822e",
+      "digests": {
+        "decl": "748cea7c1bbd91f1",
+        "body": "8a5136e6efcb6e34",
+        "unit": "c70c822e61e56be4",
+        "file": "1dfea014a1300af1"
+      },
+      "judgment": [
+        "T2",
+        "T8",
+        "T9"
+      ],
+      "sealed": [
+        "N2",
+        "N4"
+      ]
+    },
+    {
+      "id": "u5",
+      "path": "Tests/AdRevenueClientTests/AdRevenueClientTests.swift",
+      "kind": "function",
+      "kinds": [
+        "change",
+        "function",
+        "test"
+      ],
+      "start": 74,
+      "end": 111,
+      "side": "new",
+      "name": "funnelConformanceMapping",
+      "sha": "1d6a5bb7",
+      "digests": {
+        "decl": "7c3a32c976ceadcc",
+        "body": "24fbb185e01290d0",
+        "unit": "1d6a5bb76c321e53",
+        "file": "1dfea014a1300af1"
+      },
+      "judgment": [
+        "T2",
+        "T8",
+        "T9"
+      ],
+      "sealed": [
+        "C2",
+        "C4",
+        "G2",
+        "G16",
+        "G20",
+        "G21",
+        "G31",
+        "N2",
+        "N4"
+      ]
+    }
+  ],
+  "hits": [],
+  "candidates": [
+    {
+      "id": "G14:Sources/AdRevenueClientLive/AdRevenueClient+Funnel.swift:12566065",
+      "code": "G14",
+      "tier": "B",
+      "path": "Sources/AdRevenueClientLive/AdRevenueClient+Funnel.swift",
+      "line": 31,
+      "evidence": "funnelEvent reaches into event 7 times",
+      "unit": "u2"
+    },
+    {
+      "id": "N1:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:01edc6f4",
+      "code": "N1",
+      "tier": "B",
+      "path": "Tests/AdRevenueClientTests/AdRevenueClientTests.swift",
+      "line": 122,
+      "evidence": "vague local name: data",
+      "unit": "u4"
+    },
+    {
+      "id": "G10:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:17139041",
+      "code": "G10",
+      "tier": "B",
+      "path": "Tests/AdRevenueClientTests/AdRevenueClientTests.swift",
+      "line": 79,
+      "evidence": "mapped is declared 17 lines before first use",
+      "unit": "u5"
+    },
+    {
+      "id": "G30:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:8ae1e6b3",
+      "code": "G30",
+      "tier": "B",
+      "path": "Tests/AdRevenueClientTests/AdRevenueClientTests.swift",
+      "line": 74,
+      "evidence": "funnelConformanceMapping spans 38 lines",
+      "unit": "u5"
+    },
+    {
+      "id": "G14:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:6c797331",
+      "code": "G14",
+      "tier": "B",
+      "path": "Tests/AdRevenueClientTests/AdRevenueClientTests.swift",
+      "line": 74,
+      "evidence": "funnelConformanceMapping reaches into events 9 times",
+      "unit": "u5"
+    }
+  ],
+  "judgment_only": [
+    "T2",
+    "T8",
+    "T9"
+  ],
+  "exceptions": {},
+  "verdicts": {
+    "G14:Sources/AdRevenueClientLive/AdRevenueClient+Funnel.swift:12566065": {
+      "evidence": "funnelEvent is a field-by-field mapper from AdRevenueClient.Event to the FunnelClient port type; reading the source event's fields is its whole job, and the port type cannot own a conversion from this package (FunnelClient must not depend on AdRevenueClient)",
+      "unit_sha": "886d75a3",
+      "code": "G14",
+      "mark": "7e82b395:60609d45",
+      "confirmed": false,
+      "review": "funnelEvent only reads AdRevenueClient.Event's own fields to build the FunnelClient DTO, and FunnelClient's port type cannot depend back on AdRevenueClient, so the conversion has nowhere else to live"
+    },
+    "G10:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:17139041": {
+      "evidence": "mapped must be created before the source yields so the mapping stream exists; it is the subject under test, declared at arrange, consumed at act (Arrange-Act-Assert)",
+      "unit_sha": "1d6a5bb7",
+      "code": "G10",
+      "mark": "9a15761d:60609d45",
+      "confirmed": false,
+      "review": "`mapped` is the subject under test and must be declared before the continuation yields, which is exactly arrange-before-act, not a hidden ordering bug"
+    },
+    "G30:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:8ae1e6b3": {
+      "evidence": "one test of one behavior (the Funnel mapping); length is the fixture with 8 fields plus one #expect per mapped field",
+      "unit_sha": "1d6a5bb7",
+      "code": "G30",
+      "mark": "b0492219:60609d45",
+      "confirmed": false,
+      "review": "the test verifies one behavior (field-by-field Funnel mapping) and its length is the 8-field fixture plus one #expect per mapped field, not several responsibilities"
+    },
+    "G14:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:6c797331": {
+      "evidence": "assertions on the mapped event's fields are the test's purpose; one #expect per field keeps each failure pinpointed",
+      "unit_sha": "1d6a5bb7",
+      "code": "G14",
+      "mark": "7e82b395:60609d45",
+      "confirmed": false,
+      "review": "asserting each mapped field individually is the test's stated purpose and keeps a failure pinpointed to the exact field that broke"
+    },
+    "N1:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:01edc6f4": {
+      "evidence": "untouched pre-existing line in codableRoundTrip; 'data' is the standard name for the encoded Data in a 3-line JSON round-trip (N5 short scope)",
+      "unit_sha": "c70c822e",
+      "code": "N1",
+      "mark": "0f98b60e:60609d45",
+      "confirmed": false
+    }
+  },
+  "review": {
+    "rounds": 3,
+    "hash": "52b71ee687a609542d0c80ed9df84eab81ccf50d0fd52db9602eab495622c0b9",
+    "expected": {
+      "u1": [
+        "C3",
+        "C5",
+        "F4",
+        "G5",
+        "G9",
+        "G11",
+        "G24"
+      ],
+      "u2": [
+        "C3",
+        "C5",
+        "F3",
+        "F4",
+        "G3",
+        "G5",
+        "G9",
+        "G11",
+        "G14",
+        "G15",
+        "G18",
+        "G19",
+        "G23",
+        "G24",
+        "G26",
+        "G28",
+        "G29",
+        "G30",
+        "G33",
+        "G34",
+        "G35",
+        "G36",
+        "N1",
+        "N3",
+        "N5",
+        "N7"
+      ],
+      "u3": [
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "F3",
+        "F4",
+        "G2",
+        "G3",
+        "G5",
+        "G6",
+        "G9",
+        "G11",
+        "G14",
+        "G15",
+        "G16",
+        "G18",
+        "G19",
+        "G20",
+        "G21",
+        "G23",
+        "G24",
+        "G26",
+        "G28",
+        "G29",
+        "G30",
+        "G31",
+        "G32",
+        "G33",
+        "G34",
+        "G35",
+        "G36",
+        "N1",
+        "N2",
+        "N3",
+        "N4",
+        "N5",
+        "N7",
+        "T1",
+        "T2",
+        "T3",
+        "T5",
+        "T6",
+        "T7",
+        "T8",
+        "T9"
+      ],
+      "u4": [
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "F4",
+        "G3",
+        "G5",
+        "G6",
+        "G8",
+        "G9",
+        "G11",
+        "G13",
+        "G14",
+        "G16",
+        "G17",
+        "G20",
+        "G22",
+        "G24",
+        "G27",
+        "G31",
+        "G32",
+        "G33",
+        "N1",
+        "N3",
+        "N5",
+        "N7",
+        "T1",
+        "T2",
+        "T3",
+        "T5",
+        "T6",
+        "T7",
+        "T8",
+        "T9"
+      ],
+      "u5": [
+        "C3",
+        "C5",
+        "F3",
+        "F4",
+        "G3",
+        "G5",
+        "G6",
+        "G9",
+        "G11",
+        "G14",
+        "G15",
+        "G18",
+        "G19",
+        "G23",
+        "G24",
+        "G26",
+        "G28",
+        "G29",
+        "G30",
+        "G32",
+        "G33",
+        "G34",
+        "G35",
+        "G36",
+        "N1",
+        "N3",
+        "N5",
+        "N7",
+        "T1",
+        "T2",
+        "T3",
+        "T5",
+        "T6",
+        "T7",
+        "T8",
+        "T9"
+      ]
+    },
+    "answers": [
+      "G14:Sources/AdRevenueClientLive/AdRevenueClient+Funnel.swift:12566065",
+      "G10:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:17139041",
+      "G30:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:8ae1e6b3",
+      "G14:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:6c797331",
+      "N1:Tests/AdRevenueClientTests/AdRevenueClientTests.swift:01edc6f4"
+    ],
+    "validated": false,
+    "by": "reviewer"
   }
 }

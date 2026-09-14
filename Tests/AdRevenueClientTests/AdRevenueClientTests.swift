@@ -53,15 +53,24 @@ struct AdRevenueClientTests {
     }
 
     @Test("noop mock swallows publish and yields nothing")
-    func noopMock() async {
+    func noopMock() async throws {
         let client = AdRevenueClient.noop
+        let collector = Task { () -> [AdRevenueEvent] in
+            var events: [AdRevenueEvent] = []
+            for await event in client.events() { events.append(event) }
+            return events
+        }
+
         client.publish(.fixture(amount: 0.10))
-        var events: [AdRevenueEvent] = []
-        for await event in client.events() { events.append(event) }
+        // `noop.events` stays open by design, so observe a bounded window, then cancel to end the loop.
+        try await Task.sleep(nanoseconds: 20_000_000)
+        collector.cancel()
+
+        let events = await collector.value
         #expect(events.isEmpty)
     }
 
-    @Test("Funnel conformance maps event fields and micros amount")
+    @Test("Funnel conformance maps event fields and passes the currency amount through unscaled")
     func funnelConformanceMapping() async throws {
         let (source, continuation) = AsyncStream<AdRevenueEvent>.makeStream()
         let client = AdRevenueClient(publish: { _ in }, events: { source })
@@ -71,7 +80,7 @@ struct AdRevenueClientTests {
 
         continuation.yield(
             .fixture(
-                amount: 1_500_000,
+                amount: 0.0034,
                 currency: "USD",
                 adUnitId: "unit-1",
                 format: .rewarded,
@@ -96,7 +105,8 @@ struct AdRevenueClientTests {
         // The mediation network that filled the impression, NOT `source` — reporting
         // the SDK here would collapse every mediated network into one GA4 value.
         #expect(events.first?.adSource == "AppLovin")
-        #expect(events.first?.value == 1.5)
+        // `amount` is already in currency units (iOS `GADAdValue.value`), so it must not be rescaled.
+        #expect(events.first?.value == 0.0034)
         #expect(events.first?.currency == "USD")
     }
 
