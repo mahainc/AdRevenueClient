@@ -33,10 +33,20 @@ extension AdRevenueClient: FunnelClient.AdRevenue.Providing {
             unitID: event.adUnitId,
             featureID: event.featureId,
             slotRef: event.slotRef,
-            adFormat: event.format.rawValue,
+            adFormat: funnelAdFormat(event.format),
             adSource: event.network,
             value: event.amount,
             currency: event.currency
         )
+    }
+
+    /// The funnel names every ad format the way its guest does, and the guest calls
+    /// app-open ads `resume`. Reporting `appOpen` would leave app-open `ad_impression`
+    /// events unjoinable with the funnel's own load and dismiss events for them.
+    private static func funnelAdFormat(_ format: AdRevenueClient.Event.AdFormat) -> String {
+        switch format {
+            case .appOpen: "resume"
+            case .interstitial, .rewarded, .banner, .native: format.rawValue
+        }
     }
 }

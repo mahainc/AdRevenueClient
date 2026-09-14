@@ -110,6 +110,24 @@ struct AdRevenueClientTests {
         #expect(events.first?.currency == "USD")
     }
 
+    @Test("Funnel conformance names app-open ads the way the funnel guest does")
+    func funnelConformanceAppOpenFormat() async {
+        let (source, continuation) = AsyncStream<AdRevenueEvent>.makeStream()
+        let client = AdRevenueClient(publish: { _ in }, events: { source })
+        let mapped: AsyncStream<FunnelClient.AdRevenue.Event> = client.events()
+
+        continuation.yield(.fixture(format: .appOpen))
+        continuation.yield(.fixture(format: .native))
+        continuation.finish()
+
+        var formats: [String] = []
+        for await event in mapped {
+            formats.append(event.adFormat)
+        }
+
+        #expect(formats == ["resume", "native"])
+    }
+
     @Test("AdRevenueEvent round-trips through JSON")
     func codableRoundTrip() throws {
         let original = AdRevenueEvent.fixture(
