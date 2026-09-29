@@ -22,7 +22,7 @@ struct AdRevenueFunnelConformanceTests {
         let client = AdRevenueClient(publish: { _ in }, events: { source })
         // The client itself satisfies the port, so a host needs no wrapper type. The
         // annotation picks the port's `events()` over the client's own same-named closure.
-        let mapped: AsyncStream<FunnelClient.AdRevenue.Event> = client.events()
+        let mapped: AsyncStream<FunnelClient.Mediation.AdRevenue.Event> = client.events()
 
         continuation.yield(
             .fixture(
@@ -38,7 +38,7 @@ struct AdRevenueFunnelConformanceTests {
         )
         continuation.finish()
 
-        var events: [FunnelClient.AdRevenue.Event] = []
+        var events: [FunnelClient.Mediation.AdRevenue.Event] = []
         for await event in mapped {
             events.append(event)
         }
@@ -60,7 +60,7 @@ struct AdRevenueFunnelConformanceTests {
     func funnelConformanceAppOpenFormat() async {
         let (source, continuation) = AsyncStream<AdRevenueEvent>.makeStream()
         let client = AdRevenueClient(publish: { _ in }, events: { source })
-        let mapped: AsyncStream<FunnelClient.AdRevenue.Event> = client.events()
+        let mapped: AsyncStream<FunnelClient.Mediation.AdRevenue.Event> = client.events()
 
         continuation.yield(.fixture(format: .appOpen))
         continuation.yield(.fixture(format: .native))
