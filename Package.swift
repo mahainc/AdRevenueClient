@@ -37,7 +37,7 @@ let package = Package(
     //   .package(url: "…/AdRevenueClient.git", from: "4.2.0")                  // no funnel
     //   .package(url: "…/AdRevenueClient.git", from: "4.2.0", traits: ["Funnel"])
     traits: [
-        .default(enabledTraits: []),
+        .default(enabledTraits: ["Funnel"]),
         Trait(
             name: funnelTrait,
             description: "Conform AdRevenueClient to FunnelClient's AdRevenue port."
